@@ -19,13 +19,14 @@ public class Character : MonoBehaviour
     {
         if (currentWorkableObject != null)
         {
-            //WorkOnCurrentObject();
+            
         }
     }
+    
 
     public void WorkOnCurrentObject()
     {
-        if (currentWorkableObject != null && currentWorkableObject.CanWorkOn(gameObject))
+        if (currentWorkableObject != null)
         {
             if (currentWorkableObject.IsPositionAvailable(out var desiredPosition))
             {

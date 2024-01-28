@@ -7,15 +7,12 @@ using UnityEngine.AI;
 public class ClickManager : MonoBehaviour
 {
     public Camera camera;
-    public GameObject character;
-    public Character characterScript;
-    
-    //navmesh agent
-    private NavMeshAgent agent;
+    private GameObject character;
+    private Character characterScript;
+
 
     void Start()
     {
-        agent = character.GetComponent<NavMeshAgent>();
         SelectedCharacter.Instance.OnSelectedCharacterChange+= OnSelectedCharacterChange;
     }
 
@@ -32,10 +29,16 @@ public class ClickManager : MonoBehaviour
             Debug.DrawRay(ray.origin, ray.direction * 100, Color.red,5f);
             if (Physics.Raycast(ray, out hit))
             {
-                if (hit.collider.gameObject.CompareTag("Ore"))
+                if (hit.collider.gameObject.CompareTag("Workable"))
                 {
+                    if (character == null)
+                    {
+                        return;
+                    }
+                    var workable = hit.collider.gameObject.GetComponent<IWorkable>();
                     SelectedCharacter.Instance.SetLastSelected(hit.collider.gameObject);
-                    characterScript.SetCurrentWorkableObject(hit.collider.gameObject.GetComponent<IWorkable>());
+                    if (!workable.CanWorkOn(character)) return;
+                    characterScript.SetCurrentWorkableObject(workable);
                     characterScript.WorkOnCurrentObject();
                 }
                 else if (hit.transform.gameObject.CompareTag("Character"))
@@ -51,9 +54,7 @@ public class ClickManager : MonoBehaviour
 
     private void OnSelectedCharacterChange(GameObject selectedCharacter)
     {
-        
         character = selectedCharacter;
-        agent = character.GetComponent<NavMeshAgent>();
         characterScript = character.GetComponent<Character>();
     }
 

@@ -8,7 +8,6 @@ public interface IWorkable
 
     bool IsPositionAvailable(out Vector3 availablePosition);
     
-    bool IsPositionOccupied(Vector3 position);
     
     void StartWorking(GameObject worker); 
 
@@ -18,7 +17,10 @@ public interface IWorkable
 
     int MaxWorkers { get; } 
 
-    int CurrentWorkers { get; } 
+    int CurrentWorkers { get; }
+
+    IEnumerator Work();
     
-    
+
+
 }

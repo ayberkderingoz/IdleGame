@@ -2,8 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public interface IMineable
+public enum MaterialType
 {
-    IEnumerator Mine();
-    void StopMining();
+    None,
+    Gold,
+    Stone,
+    Wood,
+    Food
 }
