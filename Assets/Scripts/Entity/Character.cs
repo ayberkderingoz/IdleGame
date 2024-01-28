@@ -29,7 +29,7 @@ public class Character : MonoBehaviour
         {
             if (currentWorkableObject.IsPositionAvailable(out var desiredPosition))
             {
-                currentWorkableObject.StopWorking(gameObject);
+                
                 MoveCharacter(desiredPosition, currentWorkableObject.GetGameObject());
                 currentWorkableObject.StartWorking(gameObject);
             }
@@ -45,7 +45,10 @@ public class Character : MonoBehaviour
 
     public void SetCurrentWorkableObject(IWorkable workableObject)
     {
-        
+        if (currentWorkableObject != null)
+        {
+            currentWorkableObject.StopWorking(gameObject);
+        }
         currentWorkableObject = workableObject;
         currentWorkableObjectGameObject = currentWorkableObject.GetGameObject();
     }
