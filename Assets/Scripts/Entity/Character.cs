@@ -64,6 +64,16 @@ public class Character : MonoBehaviour
     {
         _stats = stats;
         _pooledObject = pooledObject;
+        PrintStats(); //TODO: will be removed
+    }
+
+    private void PrintStats()
+    {
+        Debug.Log("Mine: " + _stats.mineLevel);
+        Debug.Log("Wood: " + _stats.woodLevel);
+        Debug.Log("Farm: " + _stats.farmLevel);
+        Debug.Log("Engineering: " + _stats.engineeringLevel);
+        Debug.Log("Damage: " + _stats.damageLevel);
     }
 
 }
