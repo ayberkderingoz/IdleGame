@@ -1,4 +1,5 @@
 using System;
+using Recruit;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -6,6 +7,9 @@ public class Character : MonoBehaviour
 {
     private IWorkable currentWorkableObject;
     public GameObject currentWorkableObjectGameObject;
+    
+    private Stats _stats;
+    private PooledObject _pooledObject;
 
     private NavMeshAgent _agent;
 
@@ -52,6 +56,14 @@ public class Character : MonoBehaviour
         }
         currentWorkableObject = workableObject;
         currentWorkableObjectGameObject = currentWorkableObject.GetGameObject();
+    }
+
+
+
+    public void SetCharacter(Stats stats, PooledObject pooledObject)
+    {
+        _stats = stats;
+        _pooledObject = pooledObject;
     }
 
 }

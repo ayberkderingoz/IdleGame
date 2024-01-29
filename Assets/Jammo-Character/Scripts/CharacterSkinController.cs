@@ -22,7 +22,7 @@ public class CharacterSkinController : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    /*void Update()
     {
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
@@ -48,14 +48,14 @@ public class CharacterSkinController : MonoBehaviour
             ChangeEyeOffset(EyePosition.dead);
             ChangeAnimatorIdle("dead");
         }
-    }
+    }*/
 
     void ChangeAnimatorIdle(string trigger)
     {
         animator.SetTrigger(trigger);
     }
 
-    void ChangeMaterialSettings(int index)
+    void ChangeMaterialSettingsIndex(int index)
     {
         for (int i = 0; i < characterMaterials.Length; i++)
         {
@@ -63,6 +63,27 @@ public class CharacterSkinController : MonoBehaviour
                 characterMaterials[i].material.SetColor("_EmissionColor", eyeColors[index]);
             else
                 characterMaterials[i].material.SetTexture("_MainTex",albedoList[index]);
+        }
+    }
+
+    public void SetSkinColor(CharacterColor color)
+    {
+        switch (color)
+        {
+            case CharacterColor.Red:
+                ChangeMaterialSettingsIndex(0);
+                break;
+            case CharacterColor.Black:
+                ChangeMaterialSettingsIndex(1);
+                break;
+            case CharacterColor.Blue:
+                ChangeMaterialSettingsIndex(2);
+                break;
+            case CharacterColor.Yellow:
+                ChangeMaterialSettingsIndex(3);
+                break;
+            default:
+                break;
         }
     }
 
@@ -95,3 +116,17 @@ public class CharacterSkinController : MonoBehaviour
         }
     }
 }
+
+public enum CharacterColor
+{
+    Red,
+    Black,
+    Blue,
+    Yellow
+}
+
+
+
+
+
+
