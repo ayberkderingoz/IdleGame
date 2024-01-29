@@ -39,12 +39,20 @@ public class SelectedCharacter : MonoBehaviour
     }
     
     //highlight selected character functon
-    public void HighlightLastSelected(Color color)
+    public void HighlightLastSelected(Color color) //TODO: will be removed, here fur debugging purposes
     {
-        if (lastSelected != null )
+        if (lastSelected != null && lastSelected.CompareTag("Workable"))
         {
             var selectedCharacterRenderer = lastSelected.GetComponent<Renderer>();
             selectedCharacterRenderer.material.color = color;
+        }
+        else if(lastSelected != null && lastSelected.CompareTag("Character"))
+        {
+            if(color == Color.red)
+                lastSelected.GetComponent<CharacterSkinController>().SetSkinColor(CharacterColor.Black);
+            else if(color == Color.white)
+                lastSelected.GetComponent<CharacterSkinController>().SetSkinColor(CharacterColor.Red);
+
         }
     }
     
