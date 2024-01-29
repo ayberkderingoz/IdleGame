@@ -8,13 +8,13 @@ using UnityEngine.UI;
 
 public class RecruitPanel : MonoBehaviour
 { 
-    [SerializeField] private int panelIndex;
     //TODO: Rename text1, text2, text3, text4, text5
     [SerializeField] private TextMeshProUGUI text1;
     [SerializeField] private TextMeshProUGUI text2;
     [SerializeField] private TextMeshProUGUI text3;
     [SerializeField] private TextMeshProUGUI text4;
     [SerializeField] private TextMeshProUGUI text5;
+    [SerializeField] private TextMeshProUGUI goldCostText;
 
     [SerializeField] private Image recruitImage;
     
@@ -37,10 +37,11 @@ public class RecruitPanel : MonoBehaviour
         text5.text = text5String + " " + engineeringLevel;
     }*/
 
-    public void UpdatePanel(Stats stats,Image image)
+    public void UpdatePanel(Stats stats,Image image,int goldCost)
     {
         UpdateText(stats);
         UpdateImage(image);
+        UpdateGoldCost(goldCost);
     }
 
     private void UpdateText(Stats stats)
@@ -55,5 +56,9 @@ public class RecruitPanel : MonoBehaviour
     {
         recruitImage.sprite = image.sprite;
         recruitImage.color = image.color;
+    }
+    private void UpdateGoldCost(int goldCost)
+    {
+        goldCostText.text = goldCost.ToString();
     }
 }

@@ -47,9 +47,9 @@ public class RecruitShop : MonoBehaviour
     private void RefreshRecruitList()
     {
         recruitables = RecruitManager.Instance.GetRecruitableList();
-        firstRecruitPanel.UpdatePanel(recruitables[0].stats,GetImageFromRarity(recruitables[0].rarity));
-        secondRecruitPanel.UpdatePanel(recruitables[1].stats,GetImageFromRarity(recruitables[1].rarity));
-        thirdRecruitPanel.UpdatePanel(recruitables[2].stats,GetImageFromRarity(recruitables[2].rarity));
+        firstRecruitPanel.UpdatePanel(recruitables[0].stats,GetImageFromRarity(recruitables[0].rarity),recruitables[0].cost);
+        secondRecruitPanel.UpdatePanel(recruitables[1].stats,GetImageFromRarity(recruitables[1].rarity),recruitables[0].cost);
+        thirdRecruitPanel.UpdatePanel(recruitables[2].stats,GetImageFromRarity(recruitables[2].rarity),recruitables[0].cost);
     }
     
     
