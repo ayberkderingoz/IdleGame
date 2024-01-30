@@ -1540,7 +1540,7 @@ MonoBehaviour:
   rareRecruitImage: {fileID: 4201806974808763878, guid: 07e02f91754804a4e94351d345384d3a, type: 3}
   epicRecruitImage: {fileID: 4201806974808763878, guid: 4768b8bb6562e43eb838f2574f1c28c5, type: 3}
   legendaryRecruitImage: {fileID: 4201806974808763878, guid: 9a1c00d2c6f7646c1a89b293f7bc5558, type: 3}
-  refreshTimerMax: 300
+  refreshTimerMax: 10
 --- !u!1 &683715518
 GameObject:
   m_ObjectHideFlags: 0
