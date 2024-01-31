@@ -61,4 +61,16 @@ public class RecruitPanel : MonoBehaviour
     {
         goldCostText.text = goldCost.ToString();
     }
+    
+    public void UpdateGoldCostColor(bool canAfford)
+    {
+        if (canAfford)
+        {
+            goldCostText.color = Color.white;
+        }
+        else
+        {
+            goldCostText.color = Color.gray;
+        }
+    }
 }

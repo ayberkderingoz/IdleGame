@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -26,7 +27,13 @@ public class PlayerDataManager : MonoBehaviour
             _playerData = new PlayerData();
         }
     }
-    
+
+
+    private void Start()
+    {
+        GainGold(200);
+    }
+
 
     public PlayerData GetGameData()
     {
@@ -43,7 +50,17 @@ public class PlayerDataManager : MonoBehaviour
         }
         
     }
+    
+    public bool DoesPlayerHaveEnoughGold(int amount)
+    {
+        return _playerData.Gold >= amount;
+    }
 
+
+    public int GetPlayerGold()
+    {
+        return _playerData.Gold;
+    }
     public void GainGold(int amount)
     {
         _playerData.Gold += amount;

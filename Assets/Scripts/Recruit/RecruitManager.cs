@@ -41,6 +41,16 @@ namespace Recruit
             characterGameObject.transform.position = new Vector3(0, 0, 0); //TODO: add spawn point later on
             
         }
+
+        public void RecruitCharacter(Recruitable recruitable)
+        {
+            var characterPoolObject = ObjectPool.Instance.GetPooledObject(PooledObjectType.Character);
+            var characterGameObject = characterPoolObject.gameObject;
+            characterGameObject.GetComponent<Character>().SetCharacter(recruitable.stats,characterPoolObject);
+            characterGameObject.transform.SetParent(characterParent.transform);
+            characterGameObject.SetActive(true);
+            characterGameObject.transform.position = new Vector3(0, 0, 0); //TODO: add spawn point later on
+        }
         
         public void Recruit(Stats stats)
         {
