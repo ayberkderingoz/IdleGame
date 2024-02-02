@@ -32,7 +32,6 @@ public class PlayerDataManager : MonoBehaviour
     private void Start()
     {
         LoadPlayerData();
-        Debug.Log(_playerData.Xp);
         if (_playerData == null)
         {
             _playerData = new PlayerData();
