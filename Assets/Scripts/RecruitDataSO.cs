@@ -1,5 +1,4 @@
 using Enums;
-using Microsoft.Unity.VisualStudio.Editor;
 using UnityEngine;
 
 namespace Common.UI

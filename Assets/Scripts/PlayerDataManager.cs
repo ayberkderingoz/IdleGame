@@ -37,10 +37,16 @@ public class PlayerDataManager : MonoBehaviour
             _playerData = new PlayerData();
             GainGold(200);
         }
+        Invoke(nameof(ReportListeners),0.1f);
+        
+    }
+    
+    
+    public void ReportListeners()
+    {
         OnGoldChange?.Invoke(_playerData.Gold);
         OnXpChanged?.Invoke(_playerData.Xp,_playerData.XpToNextLevel);
         OnLevelChanged?.Invoke(_playerData.Level);
-        
     }
 
 
