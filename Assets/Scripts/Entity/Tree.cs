@@ -21,9 +21,5 @@ namespace Entity
 
         }
 
-        public bool CanWorkOn(GameObject worker)
-        {
-            return true;
-        }
     }
 }

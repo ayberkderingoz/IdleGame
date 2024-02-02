@@ -15,6 +15,8 @@ public class PlayerDataManager : MonoBehaviour
     [SerializeField] private bool autoSaveEnabled = true;
 
     public Action<int> OnGoldChange;
+    public Action<float,float> OnXpChanged;
+    public Action<int> OnLevelChanged;
     
     void Awake()
     {
@@ -30,12 +32,15 @@ public class PlayerDataManager : MonoBehaviour
     private void Start()
     {
         LoadPlayerData();
+        Debug.Log(_playerData.Xp);
         if (_playerData == null)
         {
             _playerData = new PlayerData();
             GainGold(200);
         }
         OnGoldChange?.Invoke(_playerData.Gold);
+        OnXpChanged?.Invoke(_playerData.Xp,_playerData.XpToNextLevel);
+        OnLevelChanged?.Invoke(_playerData.Level);
         
     }
 
@@ -53,6 +58,7 @@ public class PlayerDataManager : MonoBehaviour
             _playerData.XpToNextLevel*=1.2f;
             GainLevel(1);
         }
+        OnXpChanged?.Invoke(_playerData.Xp,_playerData.XpToNextLevel);
         
     }
     
@@ -79,6 +85,7 @@ public class PlayerDataManager : MonoBehaviour
     public void GainLevel(int amount)
     {
         _playerData.Level += amount;
+        OnLevelChanged?.Invoke(_playerData.Level);
     }
     
     public void SavePlayerData()

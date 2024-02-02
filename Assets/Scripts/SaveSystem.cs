@@ -17,7 +17,7 @@ public static class SaveSystem
         PlayerData playerData = new PlayerData();
         playerData.Level = PlayerPrefs.GetInt("Level", 1);
         playerData.Gold = PlayerPrefs.GetInt("Gold", 200);
-        playerData.Xp = PlayerPrefs.GetInt("Xp", 0);
+        playerData.Xp = PlayerPrefs.GetFloat("Xp", 0);
         playerData.XpToNextLevel = PlayerPrefs.GetFloat("XpToNextLevel", 100);
         return playerData;
     }

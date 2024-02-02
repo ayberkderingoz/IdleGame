@@ -23,12 +23,7 @@ public class Rock : WorkableObject
         maxWorkers = 3;
         
     }
-    
-    public bool CanWorkOn(GameObject worker)
-    {
-        //TODO: Check if worker has skill to work on this rock
-        return true;
-    }
+
  
 
     
