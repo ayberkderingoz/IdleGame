@@ -13,6 +13,8 @@ public class PlayerDataManager : MonoBehaviour
 
     private float autoSaveIntervalInSeconds = 300f;
     [SerializeField] private bool autoSaveEnabled = true;
+
+    public Action<int> OnGoldChange;
     
     void Awake()
     {
@@ -21,17 +23,20 @@ public class PlayerDataManager : MonoBehaviour
             _instance = this;
         }
 
-        LoadPlayerData();
-        if (_playerData == null)
-        {
-            _playerData = new PlayerData();
-        }
+        
     }
 
 
     private void Start()
     {
-        GainGold(200);
+        LoadPlayerData();
+        if (_playerData == null)
+        {
+            _playerData = new PlayerData();
+            GainGold(200);
+        }
+        OnGoldChange?.Invoke(_playerData.Gold);
+        
     }
 
 
@@ -64,10 +69,12 @@ public class PlayerDataManager : MonoBehaviour
     public void GainGold(int amount)
     {
         _playerData.Gold += amount;
+        OnGoldChange?.Invoke(_playerData.Gold);
     }
     public void SpendGold(int amount)
     {
         _playerData.Gold -= amount;
+        OnGoldChange?.Invoke(_playerData.Gold);
     }
     public void GainLevel(int amount)
     {

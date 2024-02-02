@@ -23,9 +23,15 @@ public class RecruitShop : MonoBehaviour
     [SerializeField] private Button thirdRecruitButton;
 
     [SerializeField] private GameObject recruitConfirmPanel;
-    
-    
 
+
+
+
+    private bool isFirstRecruitBought = false;
+    private bool isSecondRecruitBought= false;
+    private bool isThirdRecruitBought= false;
+    
+    
     
     const string timerPrefix = "Next Recruit in: ";
     [SerializeField] private TextMeshProUGUI timerText;
@@ -66,11 +72,16 @@ public class RecruitShop : MonoBehaviour
 
     public void RefreshRecruitList()
     {
+        if(recruitConfirmPanel.activeSelf)
+            recruitConfirmPanel.SetActive(false);
         recruitables = RecruitManager.Instance.GetRecruitableList();
         firstRecruitPanel.UpdatePanel(recruitables[0].stats,GetImageFromRarity(recruitables[0].rarity),recruitables[0].cost);
         secondRecruitPanel.UpdatePanel(recruitables[1].stats,GetImageFromRarity(recruitables[1].rarity),recruitables[0].cost);
         thirdRecruitPanel.UpdatePanel(recruitables[2].stats,GetImageFromRarity(recruitables[2].rarity),recruitables[0].cost);
-        EnableAllButtons();
+        isFirstRecruitBought = false;
+        isSecondRecruitBought = false;
+        isThirdRecruitBought = false;
+        //EnableAllButtons();
     }
     
     
@@ -121,14 +132,16 @@ public class RecruitShop : MonoBehaviour
             var recruit = recruitables[selectedRecruitIndex];
             DisableButtonByIndex(selectedRecruitIndex);
             RecruitManager.Instance.RecruitCharacter(recruit);
+            SetRecruitBoughtByIndex(selectedRecruitIndex);
             selectedRecruitIndex = -1;
             recruitConfirmPanel.SetActive(false);
+            
         }
         else
         {
             recruitConfirmPanel.SetActive(false);
             Debug.Log("Not enough gold");
-            //TODO: show not enough gold message orrrrrrrrr in the first hand don't allow player to click on the button
+            //TODO: Now it is handeling but maybe we can add a message to the player
         }
         
     }
@@ -172,19 +185,52 @@ public class RecruitShop : MonoBehaviour
 
     private void UpdateInteractibility(int playerGold)
     {
-        if(playerGold >= recruitables[0].cost)
+        if(playerGold >= recruitables[0].cost && !isFirstRecruitBought)
             firstRecruitButton.interactable = true;
         else
             firstRecruitButton.interactable = false;
         
-        if(playerGold >= recruitables[1].cost)
+        if(playerGold >= recruitables[1].cost && !isSecondRecruitBought)
             secondRecruitButton.interactable = true;
         else
             secondRecruitButton.interactable = false;
         
-        if(playerGold >= recruitables[2].cost)
+        if(playerGold >= recruitables[2].cost && !isThirdRecruitBought)
             thirdRecruitButton.interactable = true;
         else
             thirdRecruitButton.interactable = false;
+    }
+
+    private GameObject GetRecruitPanelByIndex(int index)
+    {
+        switch (index)
+        {
+            case 0:
+                return firstRecruitPanel.gameObject;
+            case 1:
+                return secondRecruitPanel.gameObject;
+            case 2:
+                return thirdRecruitPanel.gameObject;
+            default:
+                throw new ArgumentOutOfRangeException(nameof(index), index, null);
+        }
+    }
+
+    private void SetRecruitBoughtByIndex(int index)
+    {
+        switch (index)
+        {
+            case 0:
+                isFirstRecruitBought = true;
+                break;
+            case 1:
+                isSecondRecruitBought = true;
+                break;
+            case 2:
+                isThirdRecruitBought = true;
+                break;
+            default:
+                throw new ArgumentOutOfRangeException(nameof(index), index, null);
+        }
     }
 }

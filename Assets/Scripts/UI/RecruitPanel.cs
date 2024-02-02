@@ -24,7 +24,7 @@ public class RecruitPanel : MonoBehaviour
     const string text5String = "Engineering Level";
     const string text4String = "Hunting Level";
 
-    
+    private Image panelImage;
     
 
 
@@ -36,6 +36,11 @@ public class RecruitPanel : MonoBehaviour
         text4.text = text4String + " " + huntingLevel;
         text5.text = text5String + " " + engineeringLevel;
     }*/
+    
+    void Start()
+    {
+        panelImage = GetComponent<Image>();
+    }
 
     public void UpdatePanel(Stats stats,Image image,int goldCost)
     {
@@ -72,5 +77,10 @@ public class RecruitPanel : MonoBehaviour
         {
             goldCostText.color = Color.gray;
         }
+    }
+
+    public void UpdatePanelColor(Color color)
+    {
+        panelImage.color = color;
     }
 }
