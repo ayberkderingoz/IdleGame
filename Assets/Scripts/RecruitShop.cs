@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Enums;
 using Recruit;
 using TMPro;
 using UnityEngine;
@@ -86,17 +87,17 @@ public class RecruitShop : MonoBehaviour
     
     
     
-    private Image GetImageFromRarity(Rarity rarity)
+    private Image GetImageFromRarity(RecruitRarity rarity)
     {
         switch (rarity)
         {
-            case Rarity.Common:
+            case RecruitRarity.Common:
                 return commonRecruitImage;
-            case Rarity.Rare:
+            case RecruitRarity.Rare:
                 return rareRecruitImage;
-            case Rarity.Epic:
+            case RecruitRarity.Epic:
                 return epicRecruitImage;
-            case Rarity.Legendary:
+            case RecruitRarity.Legendary:
                 return legendaryRecruitImage;
             default:
                 throw new ArgumentOutOfRangeException(nameof(rarity), rarity, null);

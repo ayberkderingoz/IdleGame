@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Enums;
 using UnityEngine;
 
 namespace Recruit
@@ -84,11 +85,11 @@ namespace Recruit
             return 100;
         }
 
-        private Rarity CalculateRarity()//TODO: calculate rarity based on stats
+        private RecruitRarity CalculateRarity()//TODO: calculate rarity based on stats
         {
             //return random rarity for now
             int random = Random.Range(0, 4);
-            return (Rarity)random;
+            return (RecruitRarity)random;
             //return Rarity.Common;
         }
     }
@@ -96,23 +97,16 @@ namespace Recruit
     {
         public Stats stats;
         public int cost;
-        public Rarity rarity;
+        public RecruitRarity rarity;
 
-        public Recruitable(Stats stats, int cost, Rarity rarity)
+        public Recruitable(Stats stats, int cost, RecruitRarity rarity)
         {
             this.stats = stats;
             this.cost = cost;
             this.rarity = rarity;
         }
     }
-    
-    public enum Rarity
-    {
-        Common,
-        Rare,
-        Epic,
-        Legendary
-    }
+
     
     public class Stats 
     { //TODO: Stats are completely random, need to think about stats
