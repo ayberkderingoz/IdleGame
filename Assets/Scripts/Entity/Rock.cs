@@ -4,11 +4,6 @@ using UnityEngine;
 
 public class Rock : WorkableObject
 {
-
-    //TODO:add workers list
-
-
-
     void Awake()
     {
         availablePositions = new Vector3[]
@@ -21,13 +16,6 @@ public class Rock : WorkableObject
 
         rewardType = MaterialType.Stone;
         maxWorkers = 3;
-        
+
     }
-
- 
-
-    
-    
-    
-    
 }

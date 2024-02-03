@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class WorkableObject : MonoBehaviour,IWorkable
+public abstract class WorkableObject : MonoBehaviour,IWorkable
 {
         protected int maxWorkers;
         protected int currentWorkers = 0;
@@ -74,10 +74,9 @@ public class WorkableObject : MonoBehaviour,IWorkable
     
         public void StopWorking(GameObject worker)
         {
-            
-            isWorking = false; //TODO: check if there are other workers
-            StopCoroutine(Work());
             RemoveWorker(worker);
+            isWorking = currentWorkers > 0;
+            StopCoroutine(Work());
         }
     
         public GameObject GetGameObject()
@@ -90,7 +89,7 @@ public class WorkableObject : MonoBehaviour,IWorkable
         public int CurrentWorkers => currentWorkers;
         
         
-        public IEnumerator Work()
+        public virtual IEnumerator Work()
         {
             while (isWorking)
             {
