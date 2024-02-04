@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,9 +9,9 @@ public class InventoryManager : MonoBehaviour
     private static InventoryManager _instance;
     public static InventoryManager Instance => _instance;
     
-    public Dictionary<MaterialType, int> inventory = new Dictionary<MaterialType, int>();
+    public Dictionary<MaterialType, int> inventory = new Dictionary<MaterialType, int>(); //TODO: maybe change material type to item SO ? 
     
-    
+    public Action<Dictionary<MaterialType, int>> OnInventoryChanged;
     
     
 
@@ -37,10 +38,12 @@ public class InventoryManager : MonoBehaviour
         if (inventory.ContainsKey(materialType))
         {
             inventory[materialType] += amount;
+            OnInventoryChanged?.Invoke(inventory);
         }
         else
         {
             inventory.Add(materialType, amount);
+            OnInventoryChanged?.Invoke(inventory);
         }
     }
     
@@ -49,6 +52,7 @@ public class InventoryManager : MonoBehaviour
         if (inventory.ContainsKey(materialType))
         {
             inventory[materialType] -= amount;
+            OnInventoryChanged?.Invoke(inventory);
         }
         else
         {
@@ -58,9 +62,9 @@ public class InventoryManager : MonoBehaviour
     
     public bool HasEnoughItem(MaterialType materialType, int amount)
     {
-        if (inventory.ContainsKey(materialType))
+        if (inventory.TryGetValue(materialType, out var value))
         {
-            return inventory[materialType] >= amount;
+            return value >= amount;
         }
         else
         {
@@ -74,6 +78,12 @@ public class InventoryManager : MonoBehaviour
         {
             Debug.Log(item.Key + " : " + item.Value);
         }
+    }
+
+
+    public Dictionary<MaterialType,int> GetInventory()
+    {
+        return inventory;
     }
     
 }
