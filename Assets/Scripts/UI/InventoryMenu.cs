@@ -40,8 +40,8 @@ namespace Common.UI
             var materialCount = Enum.GetNames(typeof(MaterialType)).Length;
             for(int i = 0;i < materialCount;i++)
             {
-                var item = Instantiate(itemPrefab, Vector3.zero, Quaternion.identity);
-                item.transform.SetParent(contentPanel);
+                var item = Instantiate(itemPrefab, Vector3.zero, Quaternion.identity,contentPanel);
+                //item.transform.SetParent(contentPanel);
                 items.Add(item);
             }
         }
