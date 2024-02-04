@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class InventoryManager : MonoBehaviour
@@ -54,10 +55,6 @@ public class InventoryManager : MonoBehaviour
             inventory[materialType] -= amount;
             OnInventoryChanged?.Invoke(inventory);
         }
-        else
-        {
-            Debug.LogError("Inventory does not contain this item");
-        }
     }
     
     public bool HasEnoughItem(MaterialType materialType, int amount)
@@ -69,6 +66,17 @@ public class InventoryManager : MonoBehaviour
         else
         {
             return false;
+        }
+    }
+    public int GetItemCount(MaterialType materialType)
+    {
+        if (inventory.TryGetValue(materialType, out var value))
+        {
+            return value;
+        }
+        else
+        {
+            return 0;
         }
     }
     
@@ -86,4 +94,20 @@ public class InventoryManager : MonoBehaviour
         return inventory;
     }
     
+    public void SortByType()
+    {
+        inventory = inventory.OrderBy(x => x.Key).ToDictionary(x => x.Key, x => x.Value);
+        OnInventoryChanged?.Invoke(inventory);
+    }
+    public void SortByAmoundAscending()
+    {
+        inventory = inventory.OrderBy(x => x.Value).ToDictionary(x => x.Key, x => x.Value);
+        OnInventoryChanged?.Invoke(inventory);
+    }
+    public void SortByAmoundDescending()
+    {
+        inventory = inventory.OrderByDescending(x => x.Value).ToDictionary(x => x.Key, x => x.Value);
+        OnInventoryChanged?.Invoke(inventory);
+    }
+
 }

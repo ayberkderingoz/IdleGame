@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Entity;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -46,6 +47,12 @@ public class ClickManager : MonoBehaviour
                     Debug.Log("Character selected");
                     SelectedCharacter.Instance.SetLastSelected(hit.collider.gameObject);
                     SelectedCharacter.Instance.SetSelectedCharacter(hit.collider.gameObject);
+                }
+                else if (hit.transform.gameObject.CompareTag("Depositable"))
+                {
+                    var depositable = hit.collider.gameObject.GetComponent<DepositableObject>();
+                    depositable.OpenRepairMenu();
+                    
                 }
             }
             

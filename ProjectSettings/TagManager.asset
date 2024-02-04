@@ -8,6 +8,8 @@ TagManager:
   - Character
   - PlayerEyes
   - Workable
+  - Repairable
+  - Depositable
   layers:
   - Default
   - TransparentFX
