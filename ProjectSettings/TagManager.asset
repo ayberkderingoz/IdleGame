@@ -10,6 +10,7 @@ TagManager:
   - Workable
   - Repairable
   - Depositable
+  - BlockRaycast
   layers:
   - Default
   - TransparentFX
