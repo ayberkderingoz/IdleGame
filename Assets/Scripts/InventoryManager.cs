@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Common.UI;
 using UnityEngine;
 
 public class InventoryManager : MonoBehaviour
@@ -13,6 +14,8 @@ public class InventoryManager : MonoBehaviour
     public Dictionary<MaterialType, int> inventory = new Dictionary<MaterialType, int>(); //TODO: maybe change material type to item SO ? 
     
     public Action<Dictionary<MaterialType, int>> OnInventoryChanged;
+
+    [SerializeField] private InventoryMenu inventoryMenu;
     
     
 
@@ -108,6 +111,11 @@ public class InventoryManager : MonoBehaviour
     {
         inventory = inventory.OrderByDescending(x => x.Value).ToDictionary(x => x.Key, x => x.Value);
         OnInventoryChanged?.Invoke(inventory);
+    }
+
+    public void OnItemClicked(InventoryItemSO item)
+    {
+        inventoryMenu.SetDescriptionPanel(item);
     }
 
 }

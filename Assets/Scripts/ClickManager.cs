@@ -1,19 +1,22 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using DefaultNamespace;
 using Entity;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.EventSystems;
 
 public class ClickManager : MonoBehaviour
 {
-    public Camera camera;
+    private Camera _camera;
     private GameObject character;
     private Character characterScript;
 
 
     void Start()
     {
+        _camera = Camera.main;
         SelectedCharacter.Instance.OnSelectedCharacterChange+= OnSelectedCharacterChange;
     }
 
@@ -23,13 +26,21 @@ public class ClickManager : MonoBehaviour
         
         if (Input.GetMouseButtonDown(0))
         {
-            
-            Ray ray = camera.ScreenPointToRay(Input.mousePosition);
+            Vector3 mousePosition = Input.mousePosition;
+            Ray ray = _camera.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit;
+            List<RaycastResult> results = new List<RaycastResult>();
+            EventSystem.current.RaycastAll(new PointerEventData(EventSystem.current) {position = mousePosition}, results);
+            if (Helpers.IsPointerOverUIElement(results))
+            {
+                return;
+            }
             // draw hit
             Debug.DrawRay(ray.origin, ray.direction * 100, Color.red,5f);
             if (Physics.Raycast(ray, out hit))
             {
+                if(hit.collider.gameObject.CompareTag("BlockRaycast")) return;
+                
                 if (hit.collider.gameObject.CompareTag("Workable"))
                 {
                     if (character == null)
