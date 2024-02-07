@@ -4,18 +4,16 @@ using UnityEngine;
 
 public class Rock : WorkableObject
 {
+
+    [SerializeField] private MaterialType _rewardType;
+    [SerializeField] private int _maxWorkers;
+    [SerializeField] private Vector3[] _availablePositions;
+    
     void Awake()
     {
-        availablePositions = new Vector3[]
-        {
-            new Vector3(0, 0, 3),  
-            new Vector3(3, 0, 0),  
-            new Vector3(0, 0, -3), 
-            new Vector3(-3, 0, 0) 
-        };
-
-        rewardType = MaterialType.Stone;
-        maxWorkers = 3;
+        availablePositions = _availablePositions;
+        rewardType = _rewardType;
+        maxWorkers = _maxWorkers;
 
     }
 }

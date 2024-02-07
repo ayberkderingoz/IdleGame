@@ -5,8 +5,9 @@ using UnityEngine;
 public enum MaterialType
 {
     None,
-    Gold,
     Stone,
     Wood,
+    Scroll,
+    Gold,
     Food
 }

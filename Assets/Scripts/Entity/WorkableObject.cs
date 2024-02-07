@@ -8,7 +8,8 @@ public abstract class WorkableObject : MonoBehaviour,IWorkable
         protected int currentWorkers = 0;
         protected MaterialType rewardType;
         protected bool isWorking = false;
-
+        protected bool isUsingMaterial = false;
+        protected MaterialType materialUsed = MaterialType.None;
         protected float workingTime = 3f;
         
         
@@ -95,6 +96,10 @@ public abstract class WorkableObject : MonoBehaviour,IWorkable
             {
                 yield return new WaitForSeconds(workingTime);
                 InventoryManager.Instance.AddItem(rewardType, 1);
+                if(isUsingMaterial)
+                {
+                    InventoryManager.Instance.RemoveItem(materialUsed, 1);
+                }
             }
         }
 

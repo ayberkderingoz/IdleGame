@@ -16,4 +16,4 @@ MonoBehaviour:
   itemImage: {fileID: 21300000, guid: 99bbc83bebbd36849b732a06e55ad60e, type: 3}
   itemCost: 5
   description: 'Just a simple stone '
-  materialType: 2
+  materialType: 1
