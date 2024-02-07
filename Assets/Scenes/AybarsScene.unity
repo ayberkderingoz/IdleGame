@@ -1620,7 +1620,7 @@ GameObject:
   - component: {fileID: 577249052}
   m_Layer: 0
   m_Name: Workbench
-  m_TagString: Depositable
+  m_TagString: Workable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4365,7 +4365,7 @@ GameObject:
   - component: {fileID: 1598166948}
   m_Layer: 0
   m_Name: Workbench (1)
-  m_TagString: Depositable
+  m_TagString: Workable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

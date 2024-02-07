@@ -39,7 +39,7 @@ public class ClickManager : MonoBehaviour
             Debug.DrawRay(ray.origin, ray.direction * 100, Color.red,5f);
             if (Physics.Raycast(ray, out hit))
             {
-                if(hit.collider.gameObject.CompareTag("BlockRaycast")) return;
+                
                 
                 if (hit.collider.gameObject.CompareTag("Workable"))
                 {

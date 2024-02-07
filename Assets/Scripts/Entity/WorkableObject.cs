@@ -95,10 +95,16 @@ public abstract class WorkableObject : MonoBehaviour,IWorkable
             while (isWorking)
             {
                 yield return new WaitForSeconds(workingTime);
-                InventoryManager.Instance.AddItem(rewardType, 1);
+                
                 if(isUsingMaterial)
                 {
+                    if (!InventoryManager.Instance.HasEnoughItem(materialUsed, 1)) continue;
                     InventoryManager.Instance.RemoveItem(materialUsed, 1);
+                    InventoryManager.Instance.AddItem(rewardType, 1);
+                }
+                else
+                {
+                    InventoryManager.Instance.AddItem(rewardType, 1);
                 }
             }
         }
