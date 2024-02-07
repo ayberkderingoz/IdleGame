@@ -11,12 +11,13 @@ namespace Common.UI
     {
         [SerializeField] private InventoryItem itemPrefab;
         [SerializeField] private RectTransform contentPanel;
+        [SerializeField] private InventoryDescription descriptionPanel;
 
         
         public List<InventoryItem> items = new List<InventoryItem>();
         
         
-        private bool _isInventoryOpen = false; //TODO: implement this to performance optimization while inventory is not open (not updating the UI)
+        
         
         
         
@@ -69,6 +70,11 @@ namespace Common.UI
         void OnEnable()
         {
             Debug.Log("InventoryMenu is enabled");
+        }
+        
+        public void SetDescriptionPanel(InventoryItemSO itemSo)
+        {
+            descriptionPanel.SetDescription(itemSo);
         }
 
     }

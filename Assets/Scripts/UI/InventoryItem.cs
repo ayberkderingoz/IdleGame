@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using UnityEngine.UI;
 
 namespace UI
@@ -9,6 +10,7 @@ namespace UI
         public int amount;
         [SerializeField] private TMPro.TextMeshProUGUI amountText;
         [SerializeField] private Image itemImage;
+        
         
         public void Initialize(InventoryItemSO item, int amount)
         {
@@ -25,6 +27,11 @@ namespace UI
             itemImage.gameObject.SetActive(true);
             
 
+        }
+
+        public void OnButtonClick()
+        {
+            InventoryManager.Instance.OnItemClicked(item);
         }
 
     }
