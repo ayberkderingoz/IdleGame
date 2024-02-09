@@ -1,5 +1,4 @@
-using System.Collections;
-using Common.UI.Interfaces;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace Entity
@@ -10,12 +9,12 @@ namespace Entity
         [SerializeField] private GameObject repairRewardObject;
         void Start()
         {
-            materialNeeded = new System.Collections.Generic.Dictionary<MaterialType, int>
+            materialNeeded = new Dictionary<MaterialType, int>
             {
                 {MaterialType.Wood, 5},
                 {MaterialType.Stone, 2},
             };
-            currentMaterialDeposited = new System.Collections.Generic.Dictionary<MaterialType, int>
+            currentMaterialDeposited = new Dictionary<MaterialType, int>
             {
                 {MaterialType.Wood, 0},
                 {MaterialType.Stone, 0},

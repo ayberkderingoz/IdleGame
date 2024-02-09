@@ -13,20 +13,17 @@ namespace Common.UI
         [SerializeField] private RectTransform contentPanel;
         [SerializeField] private InventoryDescription descriptionPanel;
 
-        
+
         public List<InventoryItem> items = new List<InventoryItem>();
-        
-        
-        
-        
-        
-        
-        public List<InventoryItemSO> inventoryItems = new List<InventoryItemSO>();
+
+        [SerializeField] private CanvasGroup _canvasGroup;
 
 
-        
-
-
+        void Awake()
+        {
+            _canvasGroup = GetComponent<CanvasGroup>();
+        }
+ 
 
         void Start()
         {
@@ -53,18 +50,13 @@ namespace Common.UI
             int startIndex = 0;
             foreach (var pair in inventory)
             {
-                var itemSo = FindCorrespondingSo(pair.Key);
+                var itemSo = ItemSOHolder.Instance.FindCorrespondingSo(pair.Key);
                 if (itemSo == null) continue;
                 items[startIndex].Initialize(itemSo, pair.Value);
                 startIndex++;
             }
         }
-
-
-        private InventoryItemSO FindCorrespondingSo(MaterialType materialType)
-        {
-            return inventoryItems.FirstOrDefault(item => item.materialType == materialType);
-        }
+        
 
 
         void OnEnable()
@@ -75,6 +67,11 @@ namespace Common.UI
         public void SetDescriptionPanel(InventoryItemSO itemSo)
         {
             descriptionPanel.SetDescription(itemSo);
+        }
+        
+        public void SetInteractable(bool isInteractable)
+        {
+            _canvasGroup.interactable = isInteractable;
         }
 
     }

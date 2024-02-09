@@ -1,3 +1,4 @@
+using Common.UI;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -20,6 +21,10 @@ namespace UI
         [SerializeField] private Button selectAllButton;
         [SerializeField] private Button sellButton;
         [SerializeField] private TextMeshProUGUI sellGoldAmountText;
+        [SerializeField] private GameObject sellConfirmationPanel;
+        [SerializeField] private InventoryMenu _inventoryMenu;
+        
+        
 
 
         public void Awake()
@@ -97,6 +102,13 @@ namespace UI
             inputField.text = InventoryManager.Instance.GetItemCount(selectedItemSo.materialType).ToString();
         }
         
+        public void OnSellConfirmationButtonClicked()
+        {
+            sellConfirmationPanel.SetActive(true);
+            _inventoryMenu.SetInteractable(false);
+
+        }
+        
         
         public void OnSellButtonClicked()
         {
@@ -104,6 +116,8 @@ namespace UI
             InventoryManager.Instance.RemoveItem(selectedItemSo.materialType, amount);
             PlayerDataManager.Instance.GainGold(amount * selectedItemSo.itemCost);
             ResetDescription();
+            sellConfirmationPanel.SetActive(false);
+            _inventoryMenu.SetInteractable(true);
         }
         
         

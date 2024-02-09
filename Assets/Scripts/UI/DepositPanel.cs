@@ -16,17 +16,12 @@ namespace UI
         private Dictionary<MaterialType,int> currentMaterialDeposited;
         
         
-        
-        
-        public List<InventoryItemSO> inventoryItems = new List<InventoryItemSO>();
-
-        
         public void InitializeDepositPanel(Dictionary<MaterialType,int> materialNeeded,Dictionary<MaterialType,int> currentMaterialDeposited, GameObject repairReward){
             //instantiate material needed times depositItemPrefab
             foreach (var material in materialNeeded)
             {
                 GameObject depositItem = Instantiate(depositItemPrefab, contentPanel.transform);
-                depositItem.GetComponent<DepositItem>().Initialize(GetCorrespondingSo(material.Key), material.Value, currentMaterialDeposited[material.Key]);
+                depositItem.GetComponent<DepositItem>().Initialize(ItemSOHolder.Instance.FindCorrespondingSo(material.Key), material.Value, currentMaterialDeposited[material.Key]);
             }
             this.materialNeeded = materialNeeded;
             this.currentMaterialDeposited = currentMaterialDeposited;
@@ -51,7 +46,6 @@ namespace UI
 
         private void ChangeRepairButtonState(bool isAvailable)
         {
-            Debug.Log("ChangeRepairButtonState" + isAvailable);
             startRepairButton.SetActive(isAvailable);
         }
 
@@ -60,18 +54,7 @@ namespace UI
             DepositManager.Instance.StartRepairingCurrentObject();
             gameObject.SetActive(false);
         }
-            
-        private InventoryItemSO GetCorrespondingSo(MaterialType materialType)
-        {
-            foreach (var item in inventoryItems)
-            {
-                if (item.materialType == materialType)
-                {
-                    return item;
-                }
-            }
-            return null;
-        }
+        
 
         private void OnDisable()
         {
