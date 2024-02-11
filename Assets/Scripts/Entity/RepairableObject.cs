@@ -1,16 +1,19 @@
+using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 
 namespace Entity
 {
-    public class WorkbenchRepairable : WorkableObject
+    public class RepairableObject : WorkableObject
     {
         [SerializeField] Slider repairSlider;
         [SerializeField] GameObject repairReward;
-        [SerializeField] private float repairTime;
+        [SerializeField] public float repairTime;
         
-        private float repairTimer;
+        public float repairTimer;
+
+        
 
         void Awake()
         {

@@ -41,7 +41,7 @@ public class SelectedCharacter : MonoBehaviour
     //highlight selected character functon
     public void HighlightLastSelected(Color color) //TODO: will be removed, here fur debugging purposes
     {
-        if (lastSelected != null && lastSelected.CompareTag("Workable"))
+        if (lastSelected != null && (lastSelected.CompareTag("Workable") || lastSelected.CompareTag("Depositable")||lastSelected.CompareTag("Repairable")))
         {
             var selectedCharacterRenderer = lastSelected.GetComponent<Renderer>();
             selectedCharacterRenderer.material.color = color;

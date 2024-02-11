@@ -23,6 +23,7 @@ namespace UI
         [SerializeField] private TextMeshProUGUI sellGoldAmountText;
         [SerializeField] private GameObject sellConfirmationPanel;
         [SerializeField] private InventoryMenu _inventoryMenu;
+        [SerializeField] private TextMeshProUGUI sellConfirmationText;
         
         
 
@@ -105,6 +106,7 @@ namespace UI
         public void OnSellConfirmationButtonClicked()
         {
             sellConfirmationPanel.SetActive(true);
+            sellConfirmationText.text = "Are you sure you want to sell " + inputField.text + " " + selectedItemSo.itemName + " for " + sellGoldAmountText.text + " gold?";
             _inventoryMenu.SetInteractable(false);
 
         }

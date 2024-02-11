@@ -35,6 +35,7 @@ public abstract class WorkableObject : MonoBehaviour, IWorkable
 
     public bool CanWorkOn(GameObject worker) //TODO: heryerde bunu call etmek yerine bir kere call worker inputa gerek yok galiba
     {
+        if(workers.Contains(worker)) return true;
         if (MaxWorkers > CurrentWorkers) return true;
 
         return false;
@@ -60,14 +61,14 @@ public abstract class WorkableObject : MonoBehaviour, IWorkable
     {
         AddWorker(worker);
         isWorking = true;
-        StartCoroutine(Work());
+        StartCoroutine("Work");
     }
 
     public void StopWorking(GameObject worker)
     {
         RemoveWorker(worker);
         isWorking = currentWorkers > 0;
-        StopCoroutine(Work());
+        StopCoroutine("Work");
     }
 
     public GameObject GetGameObject()

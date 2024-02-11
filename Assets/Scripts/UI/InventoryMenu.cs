@@ -71,7 +71,7 @@ namespace Common.UI
         
         public void SetInteractable(bool isInteractable)
         {
-            _canvasGroup.interactable = isInteractable;
+            contentPanel.GetComponent<CanvasGroup>().interactable = isInteractable;
         }
 
     }

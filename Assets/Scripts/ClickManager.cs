@@ -52,6 +52,7 @@ public class ClickManager : MonoBehaviour
                     if (!workable.CanWorkOn(character)) return;
                     characterScript.SetCurrentWorkableObject(workable);
                     characterScript.WorkOnCurrentObject();
+                    SelectedCharacter.Instance.SetSelectedCharacter(null);
                 }
                 else if (hit.transform.gameObject.CompareTag("Character"))
                 {
@@ -63,6 +64,21 @@ public class ClickManager : MonoBehaviour
                 {
                     var depositable = hit.collider.gameObject.GetComponent<DepositableObject>();
                     depositable.OpenRepairMenu();
+                    SelectedCharacter.Instance.SetSelectedCharacter(null);
+                }
+                else if (hit.transform.gameObject.CompareTag("Repairable"))
+                {
+                    
+                    if (character != null)
+                    {
+                        var workable = hit.collider.gameObject.GetComponent<IWorkable>();
+                        SelectedCharacter.Instance.SetLastSelected(hit.collider.gameObject);
+                        if (!workable.CanWorkOn(character)) return;
+                        characterScript.SetCurrentWorkableObject(workable);
+                        characterScript.WorkOnCurrentObject();
+                        SelectedCharacter.Instance.SetSelectedCharacter(null);
+                    }
+                    RepairManager.Instance.InitializeRepairPanel(hit.collider.gameObject.GetComponent<RepairableObject>());
                     
                 }
             }
@@ -73,6 +89,11 @@ public class ClickManager : MonoBehaviour
     private void OnSelectedCharacterChange(GameObject selectedCharacter)
     {
         character = selectedCharacter;
+        if (character == null)
+        {
+            characterScript = null;
+            return;
+        }
         characterScript = character.GetComponent<Character>();
     }
 
