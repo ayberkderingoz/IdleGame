@@ -8,7 +8,7 @@ public class Character : MonoBehaviour
     private IWorkable currentWorkableObject;
     public GameObject currentWorkableObjectGameObject;
     
-    private Stats _stats;
+    public Stats stats;
     private PooledObject _pooledObject;
 
     private NavMeshAgent _agent;
@@ -36,7 +36,7 @@ public class Character : MonoBehaviour
             {
                 
                 MoveCharacter(desiredPosition, currentWorkableObject.GetGameObject());
-                currentWorkableObject.StartWorking(gameObject);
+                currentWorkableObject.StartWorking(this,gameObject);
             }
         }
         //TODO: Implement else methods for when the character cannot work on the current workable object
@@ -52,7 +52,7 @@ public class Character : MonoBehaviour
     {
         if (currentWorkableObject != null)
         {
-            currentWorkableObject.StopWorking(gameObject);
+            currentWorkableObject.StopWorking(this,gameObject);
         }
         currentWorkableObject = workableObject;
         currentWorkableObjectGameObject = currentWorkableObject.GetGameObject();
@@ -62,18 +62,18 @@ public class Character : MonoBehaviour
 
     public void SetCharacter(Stats stats, PooledObject pooledObject)
     {
-        _stats = stats;
+        this.stats = stats;
         _pooledObject = pooledObject;
         PrintStats(); //TODO: will be removed
     }
 
     private void PrintStats()
     {
-        Debug.Log("Mine: " + _stats.mineLevel);
-        Debug.Log("Wood: " + _stats.woodLevel);
-        Debug.Log("Farm: " + _stats.farmLevel);
-        Debug.Log("Engineering: " + _stats.engineeringLevel);
-        Debug.Log("Damage: " + _stats.damageLevel);
+        Debug.Log("Mine: " + stats.mineLevel);
+        Debug.Log("Wood: " + stats.woodLevel);
+        Debug.Log("Farm: " + stats.farmLevel);
+        Debug.Log("Engineering: " + stats.engineeringLevel);
+        Debug.Log("Damage: " + stats.damageLevel);
     }
 
 }

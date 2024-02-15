@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using Recruit;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -27,7 +28,7 @@ namespace Entity
         }
 
 
-        public override IEnumerator Work()
+        public override IEnumerator Work(Stats stats)
         {
             while (isWorking)
             {

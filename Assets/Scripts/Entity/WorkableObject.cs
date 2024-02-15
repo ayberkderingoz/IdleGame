@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Recruit;
 using UnityEngine;
 
 public abstract class WorkableObject : MonoBehaviour, IWorkable
@@ -27,6 +28,8 @@ public abstract class WorkableObject : MonoBehaviour, IWorkable
 
     protected Dictionary<Vector3, GameObject> workerPositions = new();
     protected float workingTime = 3f;
+    protected Dictionary<Character, Coroutine> jobs = new();
+    
 
     private void Start()
     {
@@ -57,18 +60,21 @@ public abstract class WorkableObject : MonoBehaviour, IWorkable
     }
 
 
-    public void StartWorking(GameObject worker)
+    public void StartWorking(Character character,GameObject worker)
     {
         AddWorker(worker);
         isWorking = true;
-        StartCoroutine("Work");
+        jobs[character] = StartCoroutine(Work(character.stats));
     }
 
-    public void StopWorking(GameObject worker)
+    public void StopWorking(Character character,GameObject worker)
     {
-        RemoveWorker(worker);
-        isWorking = currentWorkers > 0;
-        StopCoroutine("Work");
+        if(jobs.TryGetValue(character, out var routine) && routine != null)
+        {
+            RemoveWorker(worker);
+            isWorking = currentWorkers > 0;
+            StopCoroutine(routine);
+        }
     }
 
     public GameObject GetGameObject()
@@ -79,9 +85,10 @@ public abstract class WorkableObject : MonoBehaviour, IWorkable
     public int MaxWorkers => maxWorkers;
 
     public int CurrentWorkers => currentWorkers;
+    public Dictionary<Character, Coroutine> Jobs => jobs;
 
 
-    public virtual IEnumerator Work()
+    public virtual IEnumerator Work(Stats stats)
     {
         while (isWorking)
         {
